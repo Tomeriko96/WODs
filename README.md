@@ -5,7 +5,7 @@
 A simple, well-organized collection of **Workout of the Day (WOD) ideas** for fitness enthusiasts, trainers, and athletes. Now featuring a modern **Streamlit web app** for browsing, searching, and filtering workouts! This repository is strictly for storing and sharing workout ideas, not for logging completed workouts or tracking personal fitness history.
 ## 🚀 WOD Browser App (Streamlit)
 
-Browse, search, and filter all WOD ideas in a beautiful web interface!
+Browse, search, and filter all WOD ideas in a beautiful, modern web interface!
 
 ### Quick Start
 
@@ -19,12 +19,30 @@ Browse, search, and filter all WOD ideas in a beautiful web interface!
    ```
 3. Open your browser to the URL shown (usually http://localhost:8501)
 
+### Modern Appearance & UX
+
+- **Enhanced Card Layout:** Workouts are displayed in visually distinct cards with rounded corners, subtle shadows, and clear sectioning for title, metadata, workout steps, scaling, and notes.
+- **Readable Workout Steps:** Exercises are formatted as bulleted or numbered lists for easy scanning.
+- **Filter Chips:** Active filters are shown as colored chips for clarity. Filters are grouped and more compact, with a prominent "Clear All Filters" button.
+- **Consistent Color Palette:** The app uses a cohesive, modern color scheme for backgrounds, highlights, and buttons.
+- **Improved Typography:** Larger, bolder titles and section headers, with clear font hierarchy for metadata and body text.
+- **Better Spacing:** Increased padding and whitespace between cards, filters, and sections for a clean, breathable layout.
+- **Responsive Design:** The layout adapts to mobile and desktop screens, with a flexible card grid.
+- **Visual Accents:** Icons and accent backgrounds highlight key info (category, equipment, time cap, scaling, notes).
+- **Polished Buttons:** Primary actions (like "Random Workout") are styled with accent colors and rounded corners.
+- **Empty States & Loading:** Friendly messages and spinners appear when no results are found or data is loading.
+
+
 ### Features
 - Browse all workouts by category, equipment, tags, and search
-- Enhanced card layout for easy reading
-- Filter and sort workouts
+- Visually enhanced card layout with clear sections and icons
+- Filter and sort workouts with grouped, chip-style filters
+- Responsive grid and improved spacing for readability
+- Modern color palette and typography
+- Prominent, styled action buttons (Random Workout, Export Results)
 - Pagination for large collections
 - (Optional) View statistics and RSS feed browser
+
 
 ### Project Structure (App Code)
 
@@ -33,7 +51,7 @@ main.py              # App entry point (orchestrates everything)
 src/
   app.py             # App logic: data loading, filtering, sorting
   ui.py              # UI orchestration: layout, page structure
-  ui/components.py   # Reusable UI components (cards, filters, etc.)
+  ui/components.py   # Reusable UI components (cards, filters, chips, etc.)
   config.py          # App configuration
   ...
 ```
