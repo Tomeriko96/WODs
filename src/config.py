@@ -25,9 +25,15 @@ EXCLUDED_DIRECTORIES = ["resources"]
 
 # UI settings
 ITEMS_PER_PAGE = 10
+
 DEFAULT_RSS_FEEDS = [
-    "https://www.crossfit.com/rss/workouts",
-    "https://wodwell.com/feed/",
+    "https://trainingthinktank.com/blog/feed/",
+    "https://crossfitexplode.com/feed/",
+    "https://invictusfitness.com/feed/",
+    "https://krigertraining.com/feed/",
+    "https://pushjerk.com/feed/",
+    "https://www.crossfitcardiff.com/blog?format=rss",
+    "https://crossfitvalor.com/wod?format=rss",
 ]
 
 # GitHub settings
