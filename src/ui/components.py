@@ -20,29 +20,29 @@ class UIComponents:
                 # Meta info row
                 meta_cols = st.columns([1.2,1,1])
                 with meta_cols[0]:
-                    st.markdown(f'<span class="wod-meta-label" title="Workout category">📂 Category</span><br><span class="wod-meta-value" title="{workout["category"].title()}">{workout["category"].title()}</span>', unsafe_allow_html=True)
-                    st.markdown(f'<span class="wod-meta-label" title="Required equipment">⚡ Equipment</span><br><span class="wod-meta-value" title="{workout["equipment"]}">{workout["equipment"]}</span>', unsafe_allow_html=True)
+                    st.markdown(f'<span class="wod-meta-label">📂 Category</span><br><span class="wod-meta-value">{workout["category"].title()}</span>', unsafe_allow_html=True)
+                    st.markdown(f'<span class="wod-meta-label">⚡ Equipment</span><br><span class="wod-meta-value">{workout["equipment"]}</span>', unsafe_allow_html=True)
                 with meta_cols[1]:
-                    st.markdown(f'<span class="wod-meta-label" title="Time cap for this workout">⏱️ Time Cap</span><br><span class="wod-meta-value" title="{workout["time_cap"]}">{workout["time_cap"]}</span>', unsafe_allow_html=True)
+                    st.markdown(f'<span class="wod-meta-label">⏱️ Time Cap</span><br><span class="wod-meta-value">{workout["time_cap"]}</span>', unsafe_allow_html=True)
                     if workout['tags']:
-                        st.markdown(f'<span class="wod-meta-label" title="Tags for this workout">🏷️ Tags</span>', unsafe_allow_html=True)
-                        tags_html = " ".join([f'<span class="wod-tag" title="Tag: {tag}">{tag}</span>' for tag in workout['tags']])
+                        st.markdown(f'<span class="wod-meta-label">🏷️ Tags</span>', unsafe_allow_html=True)
+                        tags_html = " ".join([f'<span class="wod-tag">{tag}</span>' for tag in workout['tags']])
                         st.markdown(tags_html, unsafe_allow_html=True)
                 with meta_cols[2]:
-                    st.markdown(f'<span class="wod-meta-label" title="Scaling options or modifications">⚡ Scaling</span>', unsafe_allow_html=True)
-                    st.markdown(f'<div class="wod-scaling" title="{workout["scaling"].replace(chr(10), " &#10;")}">{workout["scaling"].replace(chr(10), "<br>")}</div>', unsafe_allow_html=True)
+                    st.markdown(f'<span class="wod-meta-label">⚡ Scaling</span>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="wod-scaling">{workout["scaling"].replace(chr(10), "<br>")}</div>', unsafe_allow_html=True)
                 # Workout steps as Markdown list with bolder border/background
-                st.markdown('<div class="wod-section" title="Workout steps">💪 Workout:</div>', unsafe_allow_html=True)
+                st.markdown('<div class="wod-section">💪 Workout:</div>', unsafe_allow_html=True)
                 workout_lines = [line.strip('- ').strip() for line in workout['workout'].split('\n') if line.strip()]
                 if len(workout_lines) > 1:
-                    st.markdown('<div style="background:#f0f6ff;border-left:6px solid #4361ee;padding:1em 1.2em 1em 1.5em;border-radius:10px;margin-bottom:1em;" title="Workout steps">' +
-                        '<ul class="wod-workout-list" style="margin-bottom:0;">' + ''.join(f'<li title="Step">{step}</li>' for step in workout_lines) + '</ul></div>', unsafe_allow_html=True)
+                    st.markdown('<div style="background:#f0f6ff;border-left:6px solid #4361ee;padding:1em 1.2em 1em 1.5em;border-radius:10px;margin-bottom:1em;">' +
+                        '<ul class="wod-workout-list" style="margin-bottom:0;">' + ''.join(f'<li>{step}</li>' for step in workout_lines) + '</ul></div>', unsafe_allow_html=True)
                 else:
-                    st.markdown(f'<div class="wod-workout-list" style="background:#f0f6ff;border-left:6px solid #4361ee;padding:1em 1.2em 1em 1.5em;border-radius:10px;margin-bottom:1em;" title="Workout steps">{workout["workout"]}</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="wod-workout-list" style="background:#f0f6ff;border-left:6px solid #4361ee;padding:1em 1.2em 1em 1.5em;border-radius:10px;margin-bottom:1em;">{workout["workout"]}</div>', unsafe_allow_html=True)
                 # Notes
                 if workout['notes'] and workout['notes'] != "No notes":
-                    st.markdown('<div class="wod-section" title="Workout notes">📝 Notes:</div>', unsafe_allow_html=True)
-                    st.markdown(f'<div class="wod-notes" title="{workout["notes"].replace(chr(10), " &#10;")}">{workout["notes"].replace(chr(10), "<br>")}</div>', unsafe_allow_html=True)
+                    st.markdown('<div class="wod-section">📝 Notes:</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="wod-notes">{workout["notes"].replace(chr(10), "<br>")}</div>', unsafe_allow_html=True)
                 st.markdown('</div>', unsafe_allow_html=True)
                 st.markdown("<br>", unsafe_allow_html=True)
         else:

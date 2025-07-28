@@ -51,7 +51,7 @@
 - [x] Responsive grid for cards (1 column on mobile, 2+ on desktop)
 - [x] Add subtle hover effects for buttons
 - [x] Use collapsible filter panels in sidebar
-- [x] Add tooltips to all interactive elements
+- [ ] Add tooltips to all interactive elements
 - [ ] Add placeholder/graphic for empty state
 - [ ] Ensure text contrast meets accessibility standards
 - [ ] Add subtle hover effects for buttons
