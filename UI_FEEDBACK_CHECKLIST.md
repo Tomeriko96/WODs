@@ -27,9 +27,9 @@
 ## Miscellaneous Details
 - [x] Scaling/Notes sections have accent backgrounds
 - [x] Workout steps formatted as bulleted lists
-- [ ] Bolder/differently-colored border or background for workout steps
+- [x] Bolder/differently-colored border or background for workout steps
 - [ ] Test/tweak mobile responsiveness (sidebar/card layout)
-- [ ] Empty state could use a more visual/graphic placeholder
+- [x] Empty state could use a more visual/graphic placeholder
 
 ## Theming and Style Enhancements
 - [x] Enhanced card layout visually distinct from standard

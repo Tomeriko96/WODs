@@ -31,13 +31,14 @@ class UIComponents:
                 with meta_cols[2]:
                     st.markdown(f'<span class="wod-meta-label">⚡ Scaling</span>', unsafe_allow_html=True)
                     st.markdown(f'<div class="wod-scaling">{workout["scaling"].replace(chr(10), "<br>")}</div>', unsafe_allow_html=True)
-                # Workout steps as Markdown list
+                # Workout steps as Markdown list with bolder border/background
                 st.markdown('<div class="wod-section">💪 Workout:</div>', unsafe_allow_html=True)
                 workout_lines = [line.strip('- ').strip() for line in workout['workout'].split('\n') if line.strip()]
                 if len(workout_lines) > 1:
-                    st.markdown('<ul class="wod-workout-list">' + ''.join(f'<li>{step}</li>' for step in workout_lines) + '</ul>', unsafe_allow_html=True)
+                    st.markdown('<div style="background:#f0f6ff;border-left:6px solid #4361ee;padding:1em 1.2em 1em 1.5em;border-radius:10px;margin-bottom:1em;">' +
+                        '<ul class="wod-workout-list" style="margin-bottom:0;">' + ''.join(f'<li>{step}</li>' for step in workout_lines) + '</ul></div>', unsafe_allow_html=True)
                 else:
-                    st.markdown(f'<div class="wod-workout-list">{workout["workout"]}</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="wod-workout-list" style="background:#f0f6ff;border-left:6px solid #4361ee;padding:1em 1.2em 1em 1.5em;border-radius:10px;margin-bottom:1em;">{workout["workout"]}</div>', unsafe_allow_html=True)
                 # Notes
                 if workout['notes'] and workout['notes'] != "No notes":
                     st.markdown('<div class="wod-section">📝 Notes:</div>', unsafe_allow_html=True)

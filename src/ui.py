@@ -79,7 +79,11 @@ def render_ui(app_logic):
 
     # Display workouts or empty state
     if total_workouts == 0:
-        st.markdown('<div class="empty-state">No workouts match your filters 😢</div>', unsafe_allow_html=True)
+        st.markdown('''<div class="empty-state" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <div style="font-size:3.5rem;">🗂️</div>
+            <div style="font-size:1.5rem;font-weight:700;margin-top:0.5em;">No workouts found</div>
+            <div style="color:#888;margin-top:0.3em;">Try adjusting your filters or search terms.</div>
+        </div>''', unsafe_allow_html=True)
     else:
         for workout in filtered_workouts[start_idx:end_idx]:
             UIComponents.display_workout(workout, use_card_layout=use_card_layout)
