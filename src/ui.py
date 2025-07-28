@@ -85,8 +85,20 @@ def render_ui(app_logic):
             <div style="color:#888;margin-top:0.3em;">Try adjusting your filters or search terms.</div>
         </div>''', unsafe_allow_html=True)
     else:
-        for workout in filtered_workouts[start_idx:end_idx]:
-            UIComponents.display_workout(workout, use_card_layout=use_card_layout)
+        # Responsive grid: 2 columns on desktop, 1 on mobile
+        import streamlit as st
+        num_cols = 2
+        try:
+            from streamlit_javascript import st_javascript
+            width = st_javascript("window.innerWidth")
+            if width and isinstance(width, int) and width < 700:
+                num_cols = 1
+        except Exception:
+            pass
+        cols = st.columns(num_cols)
+        for idx, workout in enumerate(filtered_workouts[start_idx:end_idx]):
+            with cols[idx % num_cols]:
+                UIComponents.display_workout(workout, use_card_layout=use_card_layout)
 
     # Optionally, add statistics or RSS browser
     # app_logic.display_statistics()
