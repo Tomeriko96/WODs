@@ -27,14 +27,14 @@ def render_ui(app_logic):
         /* Sidebar improvements */
         section[data-testid="stSidebar"] h2, .sidebar-section-header { font-size: 1.18rem; font-weight: 900; color: #1976d2; margin-top: 2.1em; margin-bottom: 0.7em; letter-spacing: 0.5px; }
         .sidebar-section { margin-bottom: 2.1em; }
-        .sidebar-clear-btn button { background: #fff; color: #d32f2f; border: 2.5px solid #d32f2f; border-radius: 12px; font-weight: 900; padding: 10px 26px; margin-top: 14px; font-size: 1.13em; }
-        .sidebar-clear-btn button:hover { background: #d32f2f; color: #fff; }
+        .sidebar-clear-btn button { background: #fff; color: #d32f2f; border: 2.5px solid #d32f2f; border-radius: 12px; font-weight: 900; padding: 10px 26px; margin-top: 14px; font-size: 1.13em; transition: background 0.2s, color 0.2s, box-shadow 0.2s; }
+        .sidebar-clear-btn button:hover { background: #d32f2f; color: #fff; box-shadow: 0 2px 8px rgba(211,47,47,0.12); }
         .sidebar-section .stMultiSelect, .sidebar-section .stTextInput { margin-bottom: 1.2em; }
         /* Button polish */
-        .stButton > button { border-radius: 12px !important; font-weight: 900; font-size: 1.13em; padding: 0.7em 2.2em; background: linear-gradient(90deg, #2EC4B6 0%, #4361ee 100%); color: #fff; border: none; }
-        .stButton > button:hover { background: linear-gradient(90deg, #4361ee 0%, #2EC4B6 100%); color: #fff; }
-        .secondary-btn { background: #fff !important; color: #4361ee !important; border: 2px solid #4361ee !important; border-radius: 12px !important; font-weight: 900 !important; font-size: 1.13em !important; padding: 0.7em 2.2em !important; margin-left: 1em; }
-        .secondary-btn:hover { background: #4361ee !important; color: #fff !important; }
+        .stButton > button { border-radius: 12px !important; font-weight: 900; font-size: 1.13em; padding: 0.7em 2.2em; background: linear-gradient(90deg, #2EC4B6 0%, #4361ee 100%); color: #fff; border: none; transition: background 0.2s, color 0.2s, box-shadow 0.2s; }
+        .stButton > button:hover { background: linear-gradient(90deg, #4361ee 0%, #2EC4B6 100%); color: #fff; box-shadow: 0 2px 8px rgba(67,97,238,0.12); }
+        .secondary-btn { background: #fff !important; color: #4361ee !important; border: 2px solid #4361ee !important; border-radius: 12px !important; font-weight: 900 !important; font-size: 1.13em !important; padding: 0.7em 2.2em !important; margin-left: 1em; transition: background 0.2s, color 0.2s, box-shadow 0.2s !important; }
+        .secondary-btn:hover { background: #4361ee !important; color: #fff !important; box-shadow: 0 2px 8px rgba(67,97,238,0.12) !important; }
         /* Empty state */
         .empty-state { text-align: center; color: #888; margin: 3em 0; font-size: 1.3em; }
         </style>''', unsafe_allow_html=True)

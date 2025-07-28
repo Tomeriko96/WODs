@@ -25,18 +25,32 @@
 - [ ] Align "Export Results" with related elements (e.g., in a results header bar)
 
 ## Miscellaneous Details
-## Miscellaneous Details
-- [x] Scaling/Notes sections have accent backgrounds
-- [x] Workout steps formatted as bulleted lists
-- [x] Bolder/differently-colored border or background for workout steps
-- [x] Test/tweak mobile responsiveness (sidebar/card layout)
-- [x] Empty state could use a more visual/graphic placeholder
+ - [x] Scaling/Notes sections have accent backgrounds
+ - [x] Workout steps formatted as bulleted lists
+ - [x] Bolder/differently-colored border or background for workout steps
+ - [x] Test/tweak mobile responsiveness (sidebar/card layout)
+ - [x] Empty state could use a more visual/graphic placeholder
+
+## Other Improvements
+ - [x] Use custom font (Inter) for headings
+ - [x] Add favicon/app logo
+ - [x] Responsive grid for cards (1 column on mobile, 2+ on desktop)
+ - [x] Add subtle hover effects for buttons
+ - [ ] Use collapsible filter panels in sidebar
+ - [ ] Add tooltips to all interactive elements
+ - [x] Add placeholder/graphic for empty state
+ - [ ] Ensure text contrast meets accessibility standards
+ 
+## Other Improvements (Duplicate Entries Removed)
+ - [ ] Use collapsible filter panels in sidebar
+ - [ ] Add tooltips to all interactive elements
+ - [ ] Ensure text contrast meets accessibility standards
 ## Other Improvements
 - [x] Use custom font (Inter) for headings
 - [x] Add favicon/app logo
 - [x] Responsive grid for cards (1 column on mobile, 2+ on desktop)
-- [ ] Add subtle hover effects for buttons
-- [ ] Use collapsible filter panels in sidebar
+- [x] Add subtle hover effects for buttons
+- [x] Use collapsible filter panels in sidebar
 - [ ] Add tooltips to all interactive elements
 - [ ] Add placeholder/graphic for empty state
 - [ ] Ensure text contrast meets accessibility standards

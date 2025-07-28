@@ -78,29 +78,32 @@ class UIComponents:
     
     @staticmethod
     def display_filters_sidebar(categories, equipment, tags):
-        """Display the filters sidebar with grouped sections and a clear all button"""
+        """Display the filters sidebar with collapsible filter panels and a clear all button"""
         st.sidebar.markdown('<div class="sidebar-section-header">🔍 FILTER BY</div>', unsafe_allow_html=True)
-        # Category filter
-        selected_categories = st.sidebar.multiselect(
-            "Categories",
-            categories,
-            help="Filter by workout category"
-        )
-        # Equipment filter
-        selected_equipment = st.sidebar.multiselect(
-            "Equipment",
-            equipment,
-            help="Filter by required equipment"
-        )
-        # Tags filter (if any tags exist)
+        # Category filter in expander
+        with st.sidebar.expander("Categories", expanded=True):
+            selected_categories = st.multiselect(
+                "Select categories",
+                categories,
+                help="Filter by workout category"
+            )
+        # Equipment filter in expander
+        with st.sidebar.expander("Equipment", expanded=False):
+            selected_equipment = st.multiselect(
+                "Select equipment",
+                equipment,
+                help="Filter by required equipment"
+            )
+        # Tags filter in expander (if any tags exist)
         selected_tags = []
         if tags:
-            selected_tags = st.sidebar.multiselect(
-                "Tags",
-                tags,
-                help="Filter by workout tags"
-            )
-        # Search box
+            with st.sidebar.expander("Tags", expanded=False):
+                selected_tags = st.multiselect(
+                    "Select tags",
+                    tags,
+                    help="Filter by workout tags"
+                )
+        # Search box (not in expander)
         search_term = st.sidebar.text_input(
             "🔍 Search",
             placeholder="Search in title, workout, notes...",
@@ -111,7 +114,7 @@ class UIComponents:
             with st.sidebar.container():
                 st.markdown('<div class="sidebar-clear-btn">', unsafe_allow_html=True)
                 if st.button("🧹 Clear All Filters"):
-                    st.experimental_rerun()
+                    st.rerun()
                 st.markdown('</div>', unsafe_allow_html=True)
         return selected_categories, selected_equipment, selected_tags, search_term
     
