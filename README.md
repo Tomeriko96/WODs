@@ -1,3 +1,24 @@
+# 🚀 Deployment
+
+This app is deployed on Streamlit Cloud:
+
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://workoutoftheday.streamlit.app/)
+
+**Live app:** [workoutoftheday.streamlit.app](https://workoutoftheday.streamlit.app/)
+
+To deploy your own version:
+1. Fork or clone this repo.
+2. Push to a public GitHub repository.
+3. Go to [streamlit.io/cloud](https://streamlit.io/cloud) and connect your repo.
+4. Set the app entry point to `main.py` (or `app.py` if you change it).
+5. Make sure `requirements.txt` is present and up to date.
+
+Your app will be live at `https://<your-app-name>.streamlit.app/`.
+# WOD Browser App
+
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://workoutoftheday.streamlit.app/)
+
+Access the live app: [workoutoftheday.streamlit.app](https://workoutoftheday.streamlit.app/)
 
 # WOD Ideas Repository & 🏋️ WOD Browser App
 
