@@ -8,7 +8,16 @@ from typing import Dict
 
 class UIComponents:
     """Collection of reusable UI components"""
-    
+
+    @staticmethod
+    def display_empty_state():
+        """Display a visual/graphic placeholder for empty state"""
+        st.markdown('''<div class="empty-state" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <div style="font-size:3.5rem;">🗂️</div>
+            <div style="font-size:1.5rem;font-weight:700;margin-top:0.5em;">No workouts found</div>
+            <div style="color:#888;margin-top:0.3em;">Try adjusting your filters or search terms.</div>
+        </div>''', unsafe_allow_html=True)
+
     @staticmethod
     def display_workout(workout: Dict, use_card_layout: bool = True):
         """Display a single workout in a formatted, visually enhanced way"""
