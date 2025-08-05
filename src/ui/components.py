@@ -16,20 +16,21 @@ class UIComponents:
             with st.container():
                 st.markdown('<div class="wod-card">', unsafe_allow_html=True)
                 # Title
-                st.markdown(f'<div class="wod-title">🏋️ {workout["title"]}</div>', unsafe_allow_html=True)
-                # Meta info row (original)
+                st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">', unsafe_allow_html=True)
+                st.markdown(f'<div class="wod-title"><i class="fa-solid fa-dumbbell" style="margin-right:8px;"></i>{workout["title"]}</div>', unsafe_allow_html=True)
+                # Meta info row with FontAwesome icons
                 meta_cols = st.columns([1.2,1,1])
                 with meta_cols[0]:
-                    st.markdown(f'<span class="wod-meta-label">📂 Category</span><br><span class="wod-meta-value">{workout["category"].title()}</span>', unsafe_allow_html=True)
-                    st.markdown(f'<span class="wod-meta-label">⚡ Equipment</span><br><span class="wod-meta-value">{workout["equipment"]}</span>', unsafe_allow_html=True)
+                    st.markdown(f'<span class="wod-meta-label"><i class="fa-solid fa-layer-group"></i> Category</span><br><span class="wod-meta-value">{workout["category"].title()}</span>', unsafe_allow_html=True)
+                    st.markdown(f'<span class="wod-meta-label"><i class="fa-solid fa-toolbox"></i> Equipment</span><br><span class="wod-meta-value">{workout["equipment"]}</span>', unsafe_allow_html=True)
                 with meta_cols[1]:
-                    st.markdown(f'<span class="wod-meta-label">⏱️ Time Cap</span><br><span class="wod-meta-value">{workout["time_cap"]}</span>', unsafe_allow_html=True)
+                    st.markdown(f'<span class="wod-meta-label"><i class="fa-solid fa-stopwatch"></i> Time Cap</span><br><span class="wod-meta-value">{workout["time_cap"]}</span>', unsafe_allow_html=True)
                     if workout['tags']:
-                        st.markdown(f'<span class="wod-meta-label">🏷️ Tags</span>', unsafe_allow_html=True)
+                        st.markdown(f'<span class="wod-meta-label"><i class="fa-solid fa-tags"></i> Tags</span>', unsafe_allow_html=True)
                         tags_html = " ".join([f'<span class="wod-tag">{tag}</span>' for tag in workout['tags']])
                         st.markdown(tags_html, unsafe_allow_html=True)
                 with meta_cols[2]:
-                    st.markdown(f'<span class="wod-meta-label">⚡ Scaling</span>', unsafe_allow_html=True)
+                    st.markdown(f'<span class="wod-meta-label"><i class="fa-solid fa-person-running"></i> Scaling</span>', unsafe_allow_html=True)
                     st.markdown(f'<div class="wod-scaling">{workout["scaling"].replace(chr(10), "<br>")}</div>', unsafe_allow_html=True)
                 # Workout steps as Markdown list with bolder border/background
                 st.markdown('<div class="wod-section">💪 Workout:</div>', unsafe_allow_html=True)

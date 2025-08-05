@@ -62,14 +62,13 @@ def render_ui(app_logic):
     st.markdown('<div class="section-band">All Matching Workouts</div>', unsafe_allow_html=True)
 
     # Action buttons row (Random Workout, Export Results)
-    btn_cols = st.columns([2,1,2])
-    with btn_cols[1]:
-        st.markdown('<div style="display:flex;justify-content:center;">', unsafe_allow_html=True)
-        st.button("🎲 Random Workout", help="Show a random workout", key="random-btn", use_container_width=True)
-        st.markdown('</div>', unsafe_allow_html=True)
-    with btn_cols[2]:
-        st.button("⬇️ Export Results", help="Click to download workout list", key="export-btn")
-        st.markdown('<style>.element-container button[data-testid="baseButton-export-btn"]{margin-left:0;}.element-container button[data-testid="baseButton-export-btn"].secondary-btn{margin-left:0;}</style>', unsafe_allow_html=True)
+    st.markdown('<div style="display:flex;justify-content:center;margin-bottom:2em;">', unsafe_allow_html=True)
+    st.markdown('<style>.random-btn-large {font-size:1.45em !important;padding:1.2em 3.5em !important;border-radius:18px !important;background:linear-gradient(90deg,#2EC4B6 0%,#4361ee 100%) !important;color:#fff !important;font-weight:900 !important;box-shadow:0 4px 16px rgba(67,97,238,0.13) !important;margin-bottom:1em !important;}</style>', unsafe_allow_html=True)
+    st.button("🎲 Random Workout", help="Show a random workout", key="random-btn", use_container_width=True, type="primary")
+    st.markdown('<script>document.querySelector("button[data-testid=\'baseButton-random-btn\']").classList.add("random-btn-large")</script>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+    st.button("⬇️ Export Results", help="Click to download workout list", key="export-btn")
+    st.markdown('<style>.element-container button[data-testid="baseButton-export-btn"]{margin-left:0;}.element-container button[data-testid="baseButton-export-btn"].secondary-btn{margin-left:0;}</style>', unsafe_allow_html=True)
 
     # Sidebar filters
     categories = app_logic.get_categories()
