@@ -47,76 +47,74 @@ class UIComponents:
                 st.markdown('</div>', unsafe_allow_html=True)
                 st.markdown("<br>", unsafe_allow_html=True)
         else:
-            # Original simple layout
+            # Original simple layout, now with FontAwesome icons for metadata
             with st.container():
-                st.markdown(f"### 🏋️ {workout['title']}")
-                
-                # Create columns for key info
+                st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">', unsafe_allow_html=True)
+                st.markdown(f"<div class='wod-title'><i class='fa-solid fa-dumbbell' style='margin-right:8px;'></i>{workout['title']}</div>", unsafe_allow_html=True)
                 col1, col2, col3 = st.columns(3)
-                
                 with col1:
-                    st.markdown(f"**Category:** {workout['category'].title()}")
-                    st.markdown(f"**Equipment:** {workout['equipment']}")
-                
+                    st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-layer-group'></i> Category</span><br><span class='wod-meta-value'>{workout['category'].title()}</span>", unsafe_allow_html=True)
+                    st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-toolbox'></i> Equipment</span><br><span class='wod-meta-value'>{workout['equipment']}</span>", unsafe_allow_html=True)
                 with col2:
-                    st.markdown(f"**Time Cap:** {workout['time_cap']}")
+                    st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-stopwatch'></i> Time Cap</span><br><span class='wod-meta-value'>{workout['time_cap']}</span>", unsafe_allow_html=True)
                     if workout['tags']:
-                        st.markdown(f"**Tags:** {', '.join(workout['tags'])}")
-                
+                        st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-tags'></i> Tags</span>", unsafe_allow_html=True)
+                        tags_html = " ".join([f"<span class='wod-tag'>{tag}</span>" for tag in workout['tags']])
+                        st.markdown(tags_html, unsafe_allow_html=True)
                 with col3:
-                    st.markdown(f"**Scaling:** {workout['scaling']}")
-                
-                # Workout description
-                st.markdown("**Workout:**")
-                st.markdown(workout['workout'])
-                
-                # Notes
+                    st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-person-running'></i> Scaling</span>", unsafe_allow_html=True)
+                    st.markdown(f"<div class='wod-scaling'>{workout['scaling'].replace(chr(10), '<br>')}</div>", unsafe_allow_html=True)
+                st.markdown('<div class="wod-section">💪 Workout:</div>', unsafe_allow_html=True)
+                workout_lines = [line.strip('- ').strip() for line in workout['workout'].split('\n') if line.strip()]
+                if len(workout_lines) > 1:
+                    st.markdown('<div style="background:#f0f6ff;border-left:6px solid #4361ee;padding:1em 1.2em 1em 1.5em;border-radius:10px;margin-bottom:1em;">' +
+                        '<ul class="wod-workout-list" style="margin-bottom:0;">' + ''.join(f'<li>{step}</li>' for step in workout_lines) + '</ul></div>', unsafe_allow_html=True)
+                else:
+                    st.markdown(f'<div class="wod-workout-list" style="background:#f0f6ff;border-left:6px solid #4361ee;padding:1em 1.2em 1em 1.5em;border-radius:10px;margin-bottom:1em;">{workout["workout"]}</div>', unsafe_allow_html=True)
                 if workout['notes'] and workout['notes'] != "No notes":
-                    st.markdown("**Notes:**")
-                    st.markdown(workout['notes'])
-                
-                st.markdown("---")
+                    st.markdown('<div class="wod-section">📝 Notes:</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="wod-notes">{workout["notes"].replace(chr(10), "<br>")}</div>', unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
     
     @staticmethod
     def display_filters_sidebar(categories, equipment, tags):
         """Display the filters sidebar with collapsible filter panels and a clear all button"""
+        st.sidebar.markdown('<style>.sidebar-section-header{margin-bottom:0.5em;}.sidebar-scroll{max-height:80vh;overflow-y:auto;padding-right:8px;}</style>', unsafe_allow_html=True)
         st.sidebar.markdown('<div class="sidebar-section-header">🔍 FILTER BY</div>', unsafe_allow_html=True)
-        # Category filter in expander
-        with st.sidebar.expander("Categories", expanded=True):
-            selected_categories = st.multiselect(
-                "Select categories",
-                categories,
-                help="Filter by workout category"
-            )
-        # Equipment filter in expander
-        with st.sidebar.expander("Equipment", expanded=False):
-            selected_equipment = st.multiselect(
-                "Select equipment",
-                equipment,
-                help="Filter by required equipment"
-            )
-        # Tags filter in expander (if any tags exist)
-        selected_tags = []
-        if tags:
-            with st.sidebar.expander("Tags", expanded=False):
-                selected_tags = st.multiselect(
-                    "Select tags",
-                    tags,
-                    help="Filter by workout tags"
+        with st.sidebar.container():
+            st.markdown('<div class="sidebar-scroll">', unsafe_allow_html=True)
+            # Category filter in expander (expanded by default)
+            with st.expander("Categories", expanded=True):
+                selected_categories = st.multiselect(
+                    "Select categories",
+                    categories,
+                    help="Choose one or more workout categories to filter results."
                 )
-        # Search box (not in expander)
-        search_term = st.sidebar.text_input(
-            "🔍 Search",
-            placeholder="Search in title, workout, notes...",
-            help="Case-insensitive keyword search"
-        )
-        # Clear all filters button
-        if selected_categories or selected_equipment or selected_tags or search_term:
-            with st.sidebar.container():
-                st.markdown('<div class="sidebar-clear-btn">', unsafe_allow_html=True)
-                if st.button("🧹 Clear All Filters"):
+            with st.expander("Equipment", expanded=False):
+                selected_equipment = st.multiselect(
+                    "Select equipment",
+                    equipment,
+                    help="Choose equipment required for workouts. You can select multiple."
+                )
+            selected_tags = []
+            if tags:
+                with st.expander("Tags", expanded=False):
+                    selected_tags = st.multiselect(
+                        "Select tags",
+                        tags,
+                        help="Filter workouts by tags (e.g., cardio, strength, HIIT)."
+                    )
+            search_term = st.text_input(
+                "🔍 Search",
+                placeholder="Search in title, workout, notes...",
+                help="Type keywords to search workouts. Case-insensitive."
+            )
+            if selected_categories or selected_equipment or selected_tags or search_term:
+                st.markdown('<div class="sidebar-clear-btn" style="margin-top:0.5em;">', unsafe_allow_html=True)
+                if st.button("🧹 Clear All Filters", help="Reset all filters and show all workouts."):
                     st.rerun()
                 st.markdown('</div>', unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True)
         return selected_categories, selected_equipment, selected_tags, search_term
     
     @staticmethod

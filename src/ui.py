@@ -14,7 +14,7 @@ def render_ui(app_logic):
         /* Section header band */
         .section-band { background: #f1f6fb; border-radius: 12px; padding: 0.7rem 1.2rem; margin-bottom: 1.5rem; font-size: 1.25rem; font-weight: 900; color: #4361ee; letter-spacing: 0.5px; border-left: 6px solid #2EC4B6; }
         /* Card improvements */
-        .wod-card { background: #fff; border-radius: 22px; box-shadow: 0 6px 24px rgba(30,41,59,0.13); border: 2.5px solid #2EC4B6; margin-bottom: 36px; padding: 36px 36px 24px 36px; }
+        .wod-card { background: #fff; border-radius: 22px; box-shadow: 0 8px 32px rgba(30,41,59,0.18); border: 2.5px solid #2EC4B6; margin-bottom: 44px; margin-top: 12px; padding: 36px 36px 24px 36px; }
         .wod-title { font-family: 'Inter', sans-serif; font-size: 1.7rem; font-weight: 900; color: #22223b; margin-bottom: 0.7em; letter-spacing: -0.5px; }
         .wod-meta-label { font-weight: 800; color: #4361ee; font-size: 1.13em; }
         .wod-meta-value { font-weight: 700; color: #22223b; }
@@ -47,10 +47,31 @@ def render_ui(app_logic):
     nav_tabs = ["Browse", "Favorites", "Stats"]
     if "active_tab" not in st.session_state:
         st.session_state["active_tab"] = nav_tabs[0]
-    nav_html = '<div style="display:flex;gap:1.2em;margin-bottom:2em;">'
+    nav_html = '''<style>
+    .nav-bar {display:flex;gap:1.2em;margin-bottom:2em;}
+    .nav-tab {padding:0.7em 2em;border-radius:16px;font-weight:900;font-size:1.13em;cursor:pointer;border:2px solid #4361ee;margin-right:0.5em;transition:background 0.2s, color 0.2s, box-shadow 0.2s;}
+    .nav-tab.active {
+        background: linear-gradient(90deg, #4361ee 0%, #2EC4B6 100%);
+        color: #fff;
+        box-shadow: 0 2px 12px rgba(67,97,238,0.18);
+        border-bottom: 5px solid #2EC4B6;
+        border-top: 2.5px solid #4361ee;
+        font-size: 1.18em;
+        letter-spacing: 0.5px;
+    }
+    .nav-tab:not(.active) {
+        background: #e1f5fe;
+        color: #4361ee;
+        opacity: 0.85;
+    }
+    .nav-tab:focus {
+        outline: 2px solid #2EC4B6;
+    }
+    </style>'''
+    nav_html += '<div class="nav-bar">'
     for tab in nav_tabs:
         active = tab == st.session_state["active_tab"]
-        nav_html += f'<div style="padding:0.7em 2em;border-radius:16px;font-weight:900;font-size:1.13em;cursor:pointer;background:{'#4361ee' if active else '#e1f5fe'};color:{'#fff' if active else '#4361ee'};box-shadow:{'0 2px 8px rgba(67,97,238,0.12)' if active else 'none'};border:2px solid #4361ee;margin-right:0.5em;" onclick="window.location.hash=\'{tab}\'">{tab}</div>'
+        nav_html += f'<div class="nav-tab{' active' if active else ''}" tabindex="0" onclick="window.location.hash=\'{tab}\'">{tab}</div>'
     nav_html += '</div>'
     st.markdown(nav_html, unsafe_allow_html=True)
     # Update active tab from hash (simulate tab click)
