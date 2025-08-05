@@ -62,10 +62,12 @@ def render_ui(app_logic):
     st.markdown('<div class="section-band">All Matching Workouts</div>', unsafe_allow_html=True)
 
     # Action buttons row (Random Workout, Export Results)
-    btn_cols = st.columns([1,1,6])
-    with btn_cols[0]:
-        st.button("🎲 Random Workout", help="Show a random workout")
+    btn_cols = st.columns([2,1,2])
     with btn_cols[1]:
+        st.markdown('<div style="display:flex;justify-content:center;">', unsafe_allow_html=True)
+        st.button("🎲 Random Workout", help="Show a random workout", key="random-btn", use_container_width=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+    with btn_cols[2]:
         st.button("⬇️ Export Results", help="Click to download workout list", key="export-btn")
         st.markdown('<style>.element-container button[data-testid="baseButton-export-btn"]{margin-left:0;}.element-container button[data-testid="baseButton-export-btn"].secondary-btn{margin-left:0;}</style>', unsafe_allow_html=True)
 

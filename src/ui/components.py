@@ -17,7 +17,7 @@ class UIComponents:
                 st.markdown('<div class="wod-card">', unsafe_allow_html=True)
                 # Title
                 st.markdown(f'<div class="wod-title">🏋️ {workout["title"]}</div>', unsafe_allow_html=True)
-                # Meta info row
+                # Meta info row (original)
                 meta_cols = st.columns([1.2,1,1])
                 with meta_cols[0]:
                     st.markdown(f'<span class="wod-meta-label">📂 Category</span><br><span class="wod-meta-value">{workout["category"].title()}</span>', unsafe_allow_html=True)
