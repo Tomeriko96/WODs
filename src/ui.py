@@ -16,14 +16,14 @@ def render_ui(app_logic):
         /* Card improvements */
         .wod-card { background: #fff; border-radius: 22px; box-shadow: 0 8px 32px rgba(30,41,59,0.18); border: 2.5px solid #2EC4B6; margin-bottom: 44px; margin-top: 12px; padding: 36px 36px 24px 36px; }
         .wod-title { font-family: 'Inter', sans-serif; font-size: 1.7rem; font-weight: 900; color: #22223b; margin-bottom: 0.7em; letter-spacing: -0.5px; }
-        .wod-meta-label { font-weight: 800; color: #4361ee; font-size: 1.13em; }
-        .wod-meta-value { font-weight: 700; color: #22223b; }
-        .wod-section { margin-top: 1.3em; margin-bottom: 0.9em; font-size: 1.13em; font-weight: 800; color: #1976d2; }
+        .wod-meta-label { font-weight: 800; color: #1a237e; font-size: 1.13em; }
+        .wod-meta-value { font-weight: 700; color: #111; }
+        .wod-section { margin-top: 1.3em; margin-bottom: 0.9em; font-size: 1.13em; font-weight: 800; color: #0d47a1; }
         .wod-workout-list { margin-left: 1.4em; margin-bottom: 0.7em; }
-        .wod-scaling { background: #e0f7fa; border-left: 6px solid #00b4d8; padding: 14px 20px; border-radius: 10px; margin: 0.8em 0 1.1em 0; color: #005f73; font-weight: 600; }
-        .wod-notes { background: #fff3cd; border-left: 6px solid #ffd166; padding: 14px 20px; border-radius: 10px; margin: 0.8em 0 1.1em 0; color: #7c4700; font-weight: 600; }
+        .wod-scaling { background: #e0f7fa; border-left: 6px solid #1565c0; padding: 14px 20px; border-radius: 10px; margin: 0.8em 0 1.1em 0; color: #0d47a1; font-weight: 600; }
+        .wod-notes { background: #fff3cd; border-left: 6px solid #ffd166; padding: 14px 20px; border-radius: 10px; margin: 0.8em 0 1.1em 0; color: #4e2600; font-weight: 600; }
         .wod-tags { margin-top: 0.4em; }
-        .wod-tag { display: inline-block; background: #e1f5fe; color: #1976d2; border-radius: 16px; padding: 4px 14px; font-size: 1.05em; margin: 4px 8px 4px 0; font-weight: 800; box-shadow: 0 1px 4px rgba(67,97,238,0.08); border: 1.5px solid #b2e0fc; }
+        .wod-tag { display: inline-block; background: #e1f5fe; color: #0d47a1; border-radius: 16px; padding: 4px 14px; font-size: 1.05em; margin: 4px 8px 4px 0; font-weight: 800; box-shadow: 0 1px 4px rgba(67,97,238,0.08); border: 1.5px solid #1565c0; }
         /* Sidebar improvements */
         section[data-testid="stSidebar"] h2, .sidebar-section-header { font-size: 1.18rem; font-weight: 900; color: #1976d2; margin-top: 2.1em; margin-bottom: 0.7em; letter-spacing: 0.5px; }
         .sidebar-section { margin-bottom: 2.1em; }
