@@ -42,6 +42,23 @@ def render_ui(app_logic):
     # Colored band for main header
     st.markdown(f'<div class="section-band">{app_logic.APP_TITLE}</div>', unsafe_allow_html=True)
     st.markdown(app_logic.APP_DESCRIPTION)
+
+    # Navigation bar with color contrast and active tab highlight
+    nav_tabs = ["Browse", "Favorites", "Stats"]
+    if "active_tab" not in st.session_state:
+        st.session_state["active_tab"] = nav_tabs[0]
+    nav_html = '<div style="display:flex;gap:1.2em;margin-bottom:2em;">'
+    for tab in nav_tabs:
+        active = tab == st.session_state["active_tab"]
+        nav_html += f'<div style="padding:0.7em 2em;border-radius:16px;font-weight:900;font-size:1.13em;cursor:pointer;background:{'#4361ee' if active else '#e1f5fe'};color:{'#fff' if active else '#4361ee'};box-shadow:{'0 2px 8px rgba(67,97,238,0.12)' if active else 'none'};border:2px solid #4361ee;margin-right:0.5em;" onclick="window.location.hash=\'{tab}\'">{tab}</div>'
+    nav_html += '</div>'
+    st.markdown(nav_html, unsafe_allow_html=True)
+    # Update active tab from hash (simulate tab click)
+    import streamlit_javascript
+    tab_hash = streamlit_javascript.st_javascript("window.location.hash.substring(1)")
+    if tab_hash in nav_tabs:
+        st.session_state["active_tab"] = tab_hash
+
     st.markdown('<div class="section-band">All Matching Workouts</div>', unsafe_allow_html=True)
 
     # Action buttons row (Random Workout, Export Results)

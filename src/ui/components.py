@@ -120,26 +120,22 @@ class UIComponents:
     
     @staticmethod
     def display_sorting_options():
-        """Display sorting options in the sidebar"""
-        st.sidebar.header("🎨 Display Options")
-        use_card_layout = st.sidebar.checkbox("Enhanced Card Layout", value=True)
-        
-        # Sorting options
-        sort_options = ["None", "Title (A-Z)", "Title (Z-A)", "Category (A-Z)", "Category (Z-A)", "Time Cap (Low-High)", "Time Cap (High-Low)"]
-        sort_selection = st.sidebar.selectbox("Sort by:", sort_options)
-        
+        """Display sorting options in the sidebar, grouped in a collapsible panel"""
+        with st.sidebar.expander("Display & Sorting Options", expanded=False):
+            use_card_layout = st.checkbox("Enhanced Card Layout", value=True)
+            sort_options = ["None", "Title (A-Z)", "Title (Z-A)", "Category (A-Z)", "Category (Z-A)", "Time Cap (Low-High)", "Time Cap (High-Low)"]
+            sort_selection = st.selectbox("Sort by:", sort_options)
         return use_card_layout, sort_selection
     
     @staticmethod
     def display_pagination(total_items, items_per_page):
-        """Display pagination controls"""
+        """Display pagination controls in a collapsible panel"""
         total_pages = (total_items - 1) // items_per_page + 1
-        
+        start_idx, end_idx = 0, total_items
         if total_pages > 1:
-            page = st.number_input("Page", min_value=1, max_value=total_pages, value=1)
-            start_idx = (page - 1) * items_per_page
-            end_idx = start_idx + items_per_page
-            st.markdown(f"*Showing {start_idx + 1}-{min(end_idx, total_items)} of {total_items} workouts*")
-            return start_idx, end_idx
-        else:
-            return 0, total_items
+            with st.sidebar.expander("Pagination", expanded=False):
+                page = st.number_input("Page", min_value=1, max_value=total_pages, value=1)
+                start_idx = (page - 1) * items_per_page
+                end_idx = start_idx + items_per_page
+                st.markdown(f"*Showing {start_idx + 1}-{min(end_idx, total_items)} of {total_items} workouts*")
+        return start_idx, min(end_idx, total_items)
