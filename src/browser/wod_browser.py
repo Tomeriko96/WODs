@@ -136,24 +136,18 @@ class WODBrowser:
                 filtered_workouts = WorkoutFilter.sort_workouts(filtered_workouts, "time_cap", "High-Low" in sort_selection)
         
         # Main content area header
-        col1, col2, col3 = st.columns([2, 1, 1])
-        
-        with col1:
-            st.markdown(f"**{len(filtered_workouts)} workouts found** (out of {len(self.workouts)} total)")
-        
-        with col2:
-            # Random workout button
-            if filtered_workouts:
-                if st.button("🎲 Random Workout", type="primary"):
-                    random_workout = random.choice(filtered_workouts)
-                    st.session_state.show_random = random_workout
-            else:
-                st.warning("No workouts to choose from.")
-        
-        with col3:
-            # Export button (placeholder for future feature)
-            if filtered_workouts:
-                st.button("📤 Export Results", disabled=True, help="Coming soon!")
+        st.markdown(f"**{len(filtered_workouts)} workouts found** (out of {len(self.workouts)} total)")
+        st.markdown('<div style="display:flex;justify-content:center;margin:2em 0 2em 0;">', unsafe_allow_html=True)
+        if filtered_workouts:
+            if st.button("🎲 Random Workout", type="primary", key="central_random", help="Show a random workout", args=None):
+                random_workout = random.choice(filtered_workouts)
+                st.session_state.show_random = random_workout
+        else:
+            st.warning("No workouts to choose from.")
+        st.markdown('</div>', unsafe_allow_html=True)
+        # Export button (placeholder for future feature)
+        if filtered_workouts:
+            st.button("📤 Export Results", disabled=True, help="Coming soon!", key="export_results")
         
         # Show random workout if selected
         if hasattr(st.session_state, 'show_random'):

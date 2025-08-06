@@ -14,7 +14,8 @@ def render_ui(app_logic):
         /* Section header band */
         .section-band { background: #f1f6fb; border-radius: 12px; padding: 0.7rem 1.2rem; margin-bottom: 1.5rem; font-size: 1.25rem; font-weight: 900; color: #4361ee; letter-spacing: 0.5px; border-left: 6px solid #2EC4B6; }
         /* Card improvements */
-        .wod-card { background: #fff; border-radius: 22px; box-shadow: 0 8px 32px rgba(30,41,59,0.18); border: 2.5px solid #2EC4B6; margin-bottom: 44px; margin-top: 12px; padding: 36px 36px 24px 36px; }
+        .wod-card { background: #fff; border-radius: 22px; box-shadow: 0 12px 40px rgba(30,41,59,0.22), 0 1.5px 0 #2EC4B6; border: 2.5px solid #2EC4B6; margin-bottom: 56px; margin-top: 24px; padding: 36px 36px 24px 36px; transition: box-shadow 0.2s, transform 0.2s; }
+        .wod-card:hover { box-shadow: 0 20px 60px rgba(67,97,238,0.22), 0 1.5px 0 #2EC4B6; transform: translateY(-4px) scale(1.012); z-index: 2; }
         .wod-title { font-family: 'Inter', sans-serif; font-size: 1.7rem; font-weight: 900; color: #22223b; margin-bottom: 0.7em; letter-spacing: -0.5px; }
         .wod-meta-label { font-weight: 800; color: #1a237e; font-size: 1.13em; }
         .wod-meta-value { font-weight: 700; color: #111; }
@@ -83,9 +84,9 @@ def render_ui(app_logic):
     st.markdown('<div class="section-band">All Matching Workouts</div>', unsafe_allow_html=True)
 
     # Action buttons row (Random Workout, Export Results)
-    st.markdown('<div style="display:flex;justify-content:center;margin-bottom:2em;">', unsafe_allow_html=True)
-    st.markdown('<style>.random-btn-large {font-size:1.45em !important;padding:1.2em 3.5em !important;border-radius:18px !important;background:linear-gradient(90deg,#2EC4B6 0%,#4361ee 100%) !important;color:#fff !important;font-weight:900 !important;box-shadow:0 4px 16px rgba(67,97,238,0.13) !important;margin-bottom:1em !important;}</style>', unsafe_allow_html=True)
-    st.button("🎲 Random Workout", help="Show a random workout", key="random-btn", use_container_width=True, type="primary")
+    st.markdown('<div style="display:flex;justify-content:center;align-items:center;margin-bottom:2em;">', unsafe_allow_html=True)
+    st.markdown('<style>.random-btn-large {font-size:2em !important;padding:1.5em 4em !important;border-radius:22px !important;background:linear-gradient(90deg,#2EC4B6 0%,#4361ee 100%) !important;color:#fff !important;font-weight:900 !important;box-shadow:0 6px 24px rgba(67,97,238,0.18) !important;margin-bottom:1em !important;}</style>', unsafe_allow_html=True)
+    st.button("🎲 Random Workout", help="Show a random workout from all results", key="random-btn", use_container_width=True, type="primary")
     st.markdown('<script>document.querySelector("button[data-testid=\'baseButton-random-btn\']").classList.add("random-btn-large")</script>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
     st.button("⬇️ Export Results", help="Click to download workout list", key="export-btn")

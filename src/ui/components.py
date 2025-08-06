@@ -24,24 +24,21 @@ class UIComponents:
         if use_card_layout:
             with st.container():
                 st.markdown('<div class="wod-card">', unsafe_allow_html=True)
-                # Title with tooltip
                 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">', unsafe_allow_html=True)
-                st.markdown(f'<div class="wod-title"><i class="fa-solid fa-dumbbell" style="margin-right:8px;" title="Workout Title"></i>{workout["title"]}</div>', unsafe_allow_html=True)
-                # Meta info row with FontAwesome icons and tooltips
-                meta_cols = st.columns([1.2,1,1])
-                with meta_cols[0]:
-                    st.markdown(f'<span class="wod-meta-label"><i class="fa-solid fa-layer-group" title="Category"></i> <span title="Workout Category">Category</span></span><br><span class="wod-meta-value" title="Workout Category">{workout["category"].title()}</span>', unsafe_allow_html=True)
-                    st.markdown(f'<span class="wod-meta-label"><i class="fa-solid fa-toolbox" title="Equipment"></i> <span title="Required Equipment">Equipment</span></span><br><span class="wod-meta-value" title="Required Equipment">{workout["equipment"]}</span>', unsafe_allow_html=True)
-                with meta_cols[1]:
-                    st.markdown(f'<span class="wod-meta-label"><i class="fa-solid fa-stopwatch" title="Time Cap"></i> <span title="Workout Time Cap">Time Cap</span></span><br><span class="wod-meta-value" title="Workout Time Cap">{workout["time_cap"]}</span>', unsafe_allow_html=True)
+                st.markdown(f"<div class='wod-title'><i class='fa-solid fa-dumbbell' style='margin-right:8px;' title='Workout Title'></i>{workout['title']}</div>", unsafe_allow_html=True)
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-layer-group' title='Category'></i> <span title='Workout Category'>Category</span></span><br><span class='wod-meta-value' title='Workout Category'>{workout['category'].title()}</span>", unsafe_allow_html=True)
+                    st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-toolbox' title='Equipment'></i> <span title='Required Equipment'>Equipment</span></span><br><span class='wod-meta-value' title='Required Equipment'>{workout['equipment']}</span>", unsafe_allow_html=True)
+                with col2:
+                    st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-stopwatch' title='Time Cap'></i> <span title='Workout Time Cap'>Time Cap</span></span><br><span class='wod-meta-value' title='Workout Time Cap'>{workout['time_cap']}</span>", unsafe_allow_html=True)
                     if workout['tags']:
-                        st.markdown(f'<span class="wod-meta-label"><i class="fa-solid fa-tags" title="Tags"></i> <span title="Workout Tags">Tags</span></span>', unsafe_allow_html=True)
-                        tags_html = " ".join([f'<span class="wod-tag" title="Tag: {tag}">{tag}</span>' for tag in workout['tags']])
+                        st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-tags' title='Tags'></i> <span title='Workout Tags'>Tags</span></span>", unsafe_allow_html=True)
+                        tags_html = " ".join([f"<span class='wod-tag' title='Tag: {tag}'>{tag}</span>" for tag in workout['tags']])
                         st.markdown(tags_html, unsafe_allow_html=True)
-                with meta_cols[2]:
-                    st.markdown(f'<span class="wod-meta-label"><i class="fa-solid fa-person-running" title="Scaling"></i> <span title="Scaling Options">Scaling</span></span>', unsafe_allow_html=True)
-                    st.markdown(f'<div class="wod-scaling" title="Scaling Options">{workout["scaling"].replace(chr(10), "<br>")}</div>', unsafe_allow_html=True)
-                # Workout steps as Markdown list with bolder border/background and tooltips
+                with col3:
+                    st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-person-running' title='Scaling'></i> <span title='Scaling Options'>Scaling</span></span>", unsafe_allow_html=True)
+                    st.markdown(f"<div class='wod-scaling' title='Scaling Options'>{workout['scaling'].replace(chr(10), '<br>')}</div>", unsafe_allow_html=True)
                 st.markdown('<div class="wod-section" title="Workout Steps">💪 Workout:</div>', unsafe_allow_html=True)
                 workout_lines = [line.strip('- ').strip() for line in workout['workout'].split('\n') if line.strip()]
                 if len(workout_lines) > 1:
@@ -49,40 +46,38 @@ class UIComponents:
                         '<ul class="wod-workout-list" style="margin-bottom:0;">' + ''.join(f'<li title="Step">{step}</li>' for step in workout_lines) + '</ul></div>', unsafe_allow_html=True)
                 else:
                     st.markdown(f'<div class="wod-workout-list" style="background:#f0f6ff;border-left:6px solid #4361ee;padding:1em 1.2em 1em 1.5em;border-radius:10px;margin-bottom:1em;" title="Workout Steps">{workout["workout"]}</div>', unsafe_allow_html=True)
-                # Notes with tooltip
                 if workout['notes'] and workout['notes'] != "No notes":
                     st.markdown('<div class="wod-section" title="Workout Notes">📝 Notes:</div>', unsafe_allow_html=True)
                     st.markdown(f'<div class="wod-notes" title="Workout Notes">{workout["notes"].replace(chr(10), "<br>")}</div>', unsafe_allow_html=True)
-                st.markdown('</div>', unsafe_allow_html=True)
                 st.markdown("<br>", unsafe_allow_html=True)
         else:
             # Original simple layout, now with FontAwesome icons for metadata
             with st.container():
                 st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">', unsafe_allow_html=True)
-                st.markdown(f"<div class='wod-title'><i class='fa-solid fa-dumbbell' style='margin-right:8px;'></i>{workout['title']}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div class='wod-title'><i class='fa-solid fa-dumbbell' style='margin-right:8px;' title='Workout Title'></i>{workout['title']}</div>", unsafe_allow_html=True)
                 col1, col2, col3 = st.columns(3)
                 with col1:
-                    st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-layer-group'></i> Category</span><br><span class='wod-meta-value'>{workout['category'].title()}</span>", unsafe_allow_html=True)
-                    st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-toolbox'></i> Equipment</span><br><span class='wod-meta-value'>{workout['equipment']}</span>", unsafe_allow_html=True)
+                    st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-layer-group' title='Category'></i> <span title='Workout Category'>Category</span></span><br><span class='wod-meta-value' title='Workout Category'>{workout['category'].title()}</span>", unsafe_allow_html=True)
+                    st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-toolbox' title='Equipment'></i> <span title='Required Equipment'>Equipment</span></span><br><span class='wod-meta-value' title='Required Equipment'>{workout['equipment']}</span>", unsafe_allow_html=True)
                 with col2:
-                    st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-stopwatch'></i> Time Cap</span><br><span class='wod-meta-value'>{workout['time_cap']}</span>", unsafe_allow_html=True)
+                    st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-stopwatch' title='Time Cap'></i> <span title='Workout Time Cap'>Time Cap</span></span><br><span class='wod-meta-value' title='Workout Time Cap'>{workout['time_cap']}</span>", unsafe_allow_html=True)
                     if workout['tags']:
-                        st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-tags'></i> Tags</span>", unsafe_allow_html=True)
-                        tags_html = " ".join([f"<span class='wod-tag'>{tag}</span>" for tag in workout['tags']])
+                        st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-tags' title='Tags'></i> <span title='Workout Tags'>Tags</span></span>", unsafe_allow_html=True)
+                        tags_html = " ".join([f"<span class='wod-tag' title='Tag: {tag}'>{tag}</span>" for tag in workout['tags']])
                         st.markdown(tags_html, unsafe_allow_html=True)
                 with col3:
-                    st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-person-running'></i> Scaling</span>", unsafe_allow_html=True)
-                    st.markdown(f"<div class='wod-scaling'>{workout['scaling'].replace(chr(10), '<br>')}</div>", unsafe_allow_html=True)
-                st.markdown('<div class="wod-section">💪 Workout:</div>', unsafe_allow_html=True)
+                    st.markdown(f"<span class='wod-meta-label'><i class='fa-solid fa-person-running' title='Scaling'></i> <span title='Scaling Options'>Scaling</span></span>", unsafe_allow_html=True)
+                    st.markdown(f"<div class='wod-scaling' title='Scaling Options'>{workout['scaling'].replace(chr(10), '<br>')}</div>", unsafe_allow_html=True)
+                st.markdown('<div class="wod-section" title="Workout Steps">💪 Workout:</div>', unsafe_allow_html=True)
                 workout_lines = [line.strip('- ').strip() for line in workout['workout'].split('\n') if line.strip()]
                 if len(workout_lines) > 1:
-                    st.markdown('<div style="background:#f0f6ff;border-left:6px solid #4361ee;padding:1em 1.2em 1em 1.5em;border-radius:10px;margin-bottom:1em;">' +
-                        '<ul class="wod-workout-list" style="margin-bottom:0;">' + ''.join(f'<li>{step}</li>' for step in workout_lines) + '</ul></div>', unsafe_allow_html=True)
+                    st.markdown('<div style="background:#f0f6ff;border-left:6px solid #4361ee;padding:1em 1.2em 1em 1.5em;border-radius:10px;margin-bottom:1em;" title="Workout Steps">' +
+                        '<ul class="wod-workout-list" style="margin-bottom:0;">' + ''.join(f'<li title="Step">{step}</li>' for step in workout_lines) + '</ul></div>', unsafe_allow_html=True)
                 else:
-                    st.markdown(f'<div class="wod-workout-list" style="background:#f0f6ff;border-left:6px solid #4361ee;padding:1em 1.2em 1em 1.5em;border-radius:10px;margin-bottom:1em;">{workout["workout"]}</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="wod-workout-list" style="background:#f0f6ff;border-left:6px solid #4361ee;padding:1em 1.2em 1em 1.5em;border-radius:10px;margin-bottom:1em;" title="Workout Steps">{workout["workout"]}</div>', unsafe_allow_html=True)
                 if workout['notes'] and workout['notes'] != "No notes":
-                    st.markdown('<div class="wod-section">📝 Notes:</div>', unsafe_allow_html=True)
-                    st.markdown(f'<div class="wod-notes">{workout["notes"].replace(chr(10), "<br>")}</div>', unsafe_allow_html=True)
+                    st.markdown('<div class="wod-section" title="Workout Notes">📝 Notes:</div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="wod-notes" title="Workout Notes">{workout["notes"].replace(chr(10), "<br>")}</div>', unsafe_allow_html=True)
                 st.markdown("<br>", unsafe_allow_html=True)
     
     @staticmethod
@@ -92,18 +87,18 @@ class UIComponents:
         st.sidebar.markdown('<div class="sidebar-section-header" title="Filter workouts by category, equipment, tags, or search">🔍 FILTER BY</div>', unsafe_allow_html=True)
         with st.sidebar.container():
             st.markdown('<div class="sidebar-scroll">', unsafe_allow_html=True)
-            # Category filter in expander (expanded by default)
+            # Group all filters in collapsible panels for compactness
             with st.expander("Categories", expanded=True):
                 selected_categories = st.multiselect(
                     "Select categories",
                     categories,
-                    help="Choose one or more workout categories to filter results. (tooltip)"
+                    help="Filter by workout category (multi-select)"
                 )
             with st.expander("Equipment", expanded=False):
                 selected_equipment = st.multiselect(
                     "Select equipment",
                     equipment,
-                    help="Choose equipment required for workouts. You can select multiple. (tooltip)"
+                    help="Filter by required equipment (multi-select)"
                 )
             selected_tags = []
             if tags:
@@ -111,13 +106,14 @@ class UIComponents:
                     selected_tags = st.multiselect(
                         "Select tags",
                         tags,
-                        help="Filter workouts by tags (e.g., cardio, strength, HIIT). (tooltip)"
+                        help="Filter by workout tags (multi-select)"
                     )
-            search_term = st.text_input(
-                "🔍 Search",
-                placeholder="Search in title, workout, notes...",
-                help="Type keywords to search workouts. Case-insensitive. (tooltip)"
-            )
+            with st.expander("Search", expanded=False):
+                search_term = st.text_input(
+                    "🔍 Search",
+                    placeholder="Search in title, workout, notes...",
+                    help="Type keywords to search workouts (case-insensitive)"
+                )
             if selected_categories or selected_equipment or selected_tags or search_term:
                 st.markdown('<div class="sidebar-clear-btn" style="margin-top:0.5em;" title="Clear all filters">', unsafe_allow_html=True)
                 if st.button("🧹 Clear All Filters", help="Reset all filters and show all workouts. (tooltip)"):
