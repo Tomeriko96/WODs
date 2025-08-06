@@ -1,0 +1,2 @@
+- [x] Sidebar still feels dense/tall on desktop, especially with many filters
+- [x] Use standard icons (FontAwesome) for metadata (for more professional look)

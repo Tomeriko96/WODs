@@ -13,11 +13,10 @@
 - [ ] Sidebar still feels dense/tall on desktop, especially with many filters
 
 ## Workout Cards
-- [x] Consistent card layout with background color, shadow, and padding
-- [x] Use icons/emojis for metadata (category, equipment, time cap, scaling)
-- [ ] Use standard icons (FontAwesome) for metadata (for more professional look)
-- [ ] Subtle dividers or colored sections to break up card info
-- [ ] Card separation could be improved for scannability (cards blend together)
+ [x] Consistent card layout with background color, shadow, and padding
+ [x] Use icons/emojis for metadata (category, equipment, time cap, scaling)
+ [ ] Subtle dividers or colored sections to break up card info
+ [ ] Card separation could be improved for scannability (cards blend together)
 
 ## Button Styles & Calls to Action
 - [ ] "Random Workout" button is visually prominent, but could be larger or more central
