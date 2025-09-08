@@ -14,16 +14,17 @@ def render_ui(app_logic):
         /* Section header band */
         .section-band { background: #f1f6fb; border-radius: 12px; padding: 0.7rem 1.2rem; margin-bottom: 1.5rem; font-size: 1.25rem; font-weight: 900; color: #4361ee; letter-spacing: 0.5px; border-left: 6px solid #2EC4B6; }
         /* Card improvements */
-        .wod-card { background: #fff; border-radius: 22px; box-shadow: 0 6px 24px rgba(30,41,59,0.13); border: 2.5px solid #2EC4B6; margin-bottom: 36px; padding: 36px 36px 24px 36px; }
+        .wod-card { background: #fff; border-radius: 22px; box-shadow: 0 12px 40px rgba(30,41,59,0.22), 0 1.5px 0 #2EC4B6; border: 2.5px solid #2EC4B6; margin-bottom: 56px; margin-top: 24px; padding: 36px 36px 24px 36px; transition: box-shadow 0.2s, transform 0.2s; }
+        .wod-card:hover { box-shadow: 0 20px 60px rgba(67,97,238,0.22), 0 1.5px 0 #2EC4B6; transform: translateY(-4px) scale(1.012); z-index: 2; }
         .wod-title { font-family: 'Inter', sans-serif; font-size: 1.7rem; font-weight: 900; color: #22223b; margin-bottom: 0.7em; letter-spacing: -0.5px; }
-        .wod-meta-label { font-weight: 800; color: #4361ee; font-size: 1.13em; }
-        .wod-meta-value { font-weight: 700; color: #22223b; }
-        .wod-section { margin-top: 1.3em; margin-bottom: 0.9em; font-size: 1.13em; font-weight: 800; color: #1976d2; }
+        .wod-meta-label { font-weight: 800; color: #1a237e; font-size: 1.13em; }
+        .wod-meta-value { font-weight: 700; color: #111; }
+        .wod-section { margin-top: 1.3em; margin-bottom: 0.9em; font-size: 1.13em; font-weight: 800; color: #0d47a1; }
         .wod-workout-list { margin-left: 1.4em; margin-bottom: 0.7em; }
-        .wod-scaling { background: #e0f7fa; border-left: 6px solid #00b4d8; padding: 14px 20px; border-radius: 10px; margin: 0.8em 0 1.1em 0; color: #005f73; font-weight: 600; }
-        .wod-notes { background: #fff3cd; border-left: 6px solid #ffd166; padding: 14px 20px; border-radius: 10px; margin: 0.8em 0 1.1em 0; color: #7c4700; font-weight: 600; }
+        .wod-scaling { background: #e0f7fa; border-left: 6px solid #1565c0; padding: 14px 20px; border-radius: 10px; margin: 0.8em 0 1.1em 0; color: #0d47a1; font-weight: 600; }
+        .wod-notes { background: #fff3cd; border-left: 6px solid #ffd166; padding: 14px 20px; border-radius: 10px; margin: 0.8em 0 1.1em 0; color: #4e2600; font-weight: 600; }
         .wod-tags { margin-top: 0.4em; }
-        .wod-tag { display: inline-block; background: #e1f5fe; color: #1976d2; border-radius: 16px; padding: 4px 14px; font-size: 1.05em; margin: 4px 8px 4px 0; font-weight: 800; box-shadow: 0 1px 4px rgba(67,97,238,0.08); border: 1.5px solid #b2e0fc; }
+        .wod-tag { display: inline-block; background: #e1f5fe; color: #0d47a1; border-radius: 16px; padding: 4px 14px; font-size: 1.05em; margin: 4px 8px 4px 0; font-weight: 800; box-shadow: 0 1px 4px rgba(67,97,238,0.08); border: 1.5px solid #1565c0; }
         /* Sidebar improvements */
         section[data-testid="stSidebar"] h2, .sidebar-section-header { font-size: 1.18rem; font-weight: 900; color: #1976d2; margin-top: 2.1em; margin-bottom: 0.7em; letter-spacing: 0.5px; }
         .sidebar-section { margin-bottom: 2.1em; }
@@ -42,15 +43,54 @@ def render_ui(app_logic):
     # Colored band for main header
     st.markdown(f'<div class="section-band">{app_logic.APP_TITLE}</div>', unsafe_allow_html=True)
     st.markdown(app_logic.APP_DESCRIPTION)
+
+    # Navigation bar with color contrast and active tab highlight
+    nav_tabs = ["Browse", "Favorites", "Stats"]
+    if "active_tab" not in st.session_state:
+        st.session_state["active_tab"] = nav_tabs[0]
+    nav_html = '''<style>
+    .nav-bar {display:flex;gap:1.2em;margin-bottom:2em;}
+    .nav-tab {padding:0.7em 2em;border-radius:16px;font-weight:900;font-size:1.13em;cursor:pointer;border:2px solid #4361ee;margin-right:0.5em;transition:background 0.2s, color 0.2s, box-shadow 0.2s;}
+    .nav-tab.active {
+        background: linear-gradient(90deg, #4361ee 0%, #2EC4B6 100%);
+        color: #fff;
+        box-shadow: 0 2px 12px rgba(67,97,238,0.18);
+        border-bottom: 5px solid #2EC4B6;
+        border-top: 2.5px solid #4361ee;
+        font-size: 1.18em;
+        letter-spacing: 0.5px;
+    }
+    .nav-tab:not(.active) {
+        background: #e1f5fe;
+        color: #4361ee;
+        opacity: 0.85;
+    }
+    .nav-tab:focus {
+        outline: 2px solid #2EC4B6;
+    }
+    </style>'''
+    nav_html += '<div class="nav-bar">'
+    for tab in nav_tabs:
+        active = tab == st.session_state["active_tab"]
+        nav_html += f'<div class="nav-tab{' active' if active else ''}" tabindex="0" onclick="window.location.hash=\'{tab}\'">{tab}</div>'
+    nav_html += '</div>'
+    st.markdown(nav_html, unsafe_allow_html=True)
+    # Update active tab from hash (simulate tab click)
+    import streamlit_javascript
+    tab_hash = streamlit_javascript.st_javascript("window.location.hash.substring(1)")
+    if tab_hash in nav_tabs:
+        st.session_state["active_tab"] = tab_hash
+
     st.markdown('<div class="section-band">All Matching Workouts</div>', unsafe_allow_html=True)
 
     # Action buttons row (Random Workout, Export Results)
-    btn_cols = st.columns([1,1,6])
-    with btn_cols[0]:
-        st.button("🎲 Random Workout", help="Show a random workout")
-    with btn_cols[1]:
-        st.button("⬇️ Export Results", help="Click to download workout list", key="export-btn")
-        st.markdown('<style>.element-container button[data-testid="baseButton-export-btn"]{margin-left:0;}.element-container button[data-testid="baseButton-export-btn"].secondary-btn{margin-left:0;}</style>', unsafe_allow_html=True)
+    st.markdown('<div style="display:flex;justify-content:center;align-items:center;margin-bottom:2em;">', unsafe_allow_html=True)
+    st.markdown('<style>.random-btn-large {font-size:2em !important;padding:1.5em 4em !important;border-radius:22px !important;background:linear-gradient(90deg,#2EC4B6 0%,#4361ee 100%) !important;color:#fff !important;font-weight:900 !important;box-shadow:0 6px 24px rgba(67,97,238,0.18) !important;margin-bottom:1em !important;}</style>', unsafe_allow_html=True)
+    st.button("🎲 Random Workout", help="Show a random workout from all results", key="random-btn", use_container_width=True, type="primary")
+    st.markdown('<script>document.querySelector("button[data-testid=\'baseButton-random-btn\']").classList.add("random-btn-large")</script>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+    st.button("⬇️ Export Results", help="Click to download workout list", key="export-btn")
+    st.markdown('<style>.element-container button[data-testid="baseButton-export-btn"]{margin-left:0;}.element-container button[data-testid="baseButton-export-btn"].secondary-btn{margin-left:0;}</style>', unsafe_allow_html=True)
 
     # Sidebar filters
     categories = app_logic.get_categories()
